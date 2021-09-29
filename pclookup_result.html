@@ -1,0 +1,62 @@
+<html>
+
+<head>
+<Title>PCLookupResult</Title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+   <div>
+     <article>
+       <section>
+
+        <table>
+        <tr>
+        <th>DateTime
+        <th>ComputerName
+        <th>Username
+        <th>Event
+        </tr>
+
+        <center>
+        <form action="pclookup_result.php" method="post" name="pclookup">
+              <p><a href="index.html">back</a></p>
+              <p> Another PC Name: <input type"text" name="Computername">
+              <input type="submit" value="Search Again"></p>
+        </form>
+        </center>
+
+<?php
+
+//connect to database
+
+$query = "SELECT CONVERT(varchar,DateTime,100) AS 'DateTime', ComputerName, UserName, Event FROM GeneralActivity where ComputerName = '".$_POST["Computername"]."' order by dbo.GeneralActivity.DateTime desc";
+
+         # perform the query
+        $result = mssql_query($query);
+
+        if(! $result)
+        echo "No match Found!";
+        else
+        while($row = mssql_fetch_array($result)){
+
+        print "<tr>\n";
+        print "   <td>" . $row["DateTime"] . "\n";
+        print "   <td>" . $row["ComputerName"] . "\n";
+        print "   <td>" . $row["UserName"] . "\n";
+        print "   <td>" . $row["Event"] . "\n";
+        print "</tr>\n";
+
+}
+
+
+        mssql_close($dbhandle);
+
+?>
+
+        </table>
+        </section>
+    </article>
+   </div>
+</body>
+</html>
