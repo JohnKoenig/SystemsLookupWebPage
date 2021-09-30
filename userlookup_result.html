@@ -18,7 +18,7 @@
     <iframe src="https://ggoigr3j83.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/"></iframe>
     <hr>
     -->
-    
+
     <div id="entries">
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -36,7 +36,7 @@
             data2 = JSON.stringify(data);
             console.log("Success Again", data2);
             $('#entries').html('');
-            $('#entries').append('<p>' + data2 + '</p>');
+            $('#entries').append('<p>' + data2(CsUserName) + '</p>');
             }
         });
         });
