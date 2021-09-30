@@ -29,10 +29,11 @@
         dataType: 'json',
 
         success: function(data){
-        console.log("Success", data);
-        $('#entries').html('');
-        $('#entries').append('<p>' + JSON.parse(data) + '</p>');
-        }
+            data = JSON.parse(data)
+            console.log("Success", data);
+            $('#entries').html('');
+            $('#entries').append('<p>' + data + '</p>');
+            }
         });
         });
     </script>
