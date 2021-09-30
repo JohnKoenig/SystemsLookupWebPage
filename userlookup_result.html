@@ -6,87 +6,35 @@
 </head>
 
 <body>
-   <div>
-     <article>
-       <section>
+    <center>
+    <form action="userlookup_result.php" method="put" name="userlookup">
+        <p><a href="index.html">back</a></p>
+        <p>Another User Name: <input type"text" name="name">
+        <input type="submit" value="Search Again"></p>
+    </form>
+    </center>
 
-        <table>
-        <tr>
-        <th>DateTime
-        <th>ComputerName
-        <th>Username
-        <th>DC
-        <th>Event
-        </tr>
+    <iframe src="https://ggoigr3j83.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/"></iframe>
+    <hr>
+    <div id="entries">
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        var API_URL = 'https://ggoigr3j83.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/';
+        $(document).ready(function(){
+        $.ajax({
 
-        <center>
-         <form action="userlookup_result.php" method="put" name="userlookup">
-                <p><a href="index.html">back</a></p>
-                <p>Another User Name: <input type"text" name="name">
-                <input type="submit" value="Search Again"></p>
-        </form>
-        </center>
+        url: API_URL,
+        type: 'GET',
+        dataType: 'json',
 
-        <iframe src="https://ggoigr3j83.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/"></iframe>
-        <hr>
-        <div id="entries">
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script type="text/javascript">
-            var API_URL = 'https://ggoigr3j83.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/';
-            $(document).ready(function(){
-                $.ajax({
-
-                    url: API_URL,
-                    type: 'GET',
-                    dataType: 'json',
-
-                    success: function(data){
-                        console.log("Success", data);
-                        
-                        $('#entries').html('');
-                        $('#entries').append('<p>' + data + '</p>');
-                    }
-                });
-            });
-        </script>
-<!--
-//connect to database
-https://ggoigr3j83.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/
-
-$query = "SELECT CONVERT(varchar,DateTime,100) AS 'DateTime',ComputerName, UserName, DC, Event FROM GeneralActivity where Username = '".$_POST["name"]."' order by dbo.GeneralActivity.DateTime desc";
-
-        # perform the query
-        $result = mssql_query($query);
-
-        if(! $result)
-        echo "No match Found!";
-        else
-        while($row = mssql_fetch_array($result)){
-
-        print "<tr>\n";
-        print "   <td>" . $row["DateTime"] . "\n";
-        print "   <td>" . $row["ComputerName"] . "\n";
-        print "   <td>" . $row["UserName"] . "\n";
-        print "   <td>" . $row["DC"] . "\n";
-        print "   <td>" . $row["Event"] . "\n";
-        print "</tr>\n";
-
-}
-
-
-       mssql_close($dbhandle);
-
-?>
-
-        </table>
-        </section>
-    </article>
-   </div>
--->
-
-<!--
-        https://stackoverflow.com/questions/59755778/how-to-retrieve-data-from-aws-api-gateway-and-display-it-in-static-website-hoste
--->
+        success: function(data){
+        console.log("Success", data);
+        $('#entries').html('');
+        $('#entries').append('<p>' + data + '</p>');
+        }
+        });
+        });
+    </script>
 </body>
 </html>
