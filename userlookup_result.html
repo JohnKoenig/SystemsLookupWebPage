@@ -30,30 +30,13 @@
 
         success: function(data){
             console.log("Success", data);
+            const data2 = json.stringify(data)
+            console.log("Success Again", data2);
             $('#entries').html('');
             $('#entries').append('<p>' + data + '</p>');
             }
         });
         });
-    </script>
-
-    <p id="demo"></p>
-
-    <script>
-        const dbParam = JSON.stringify({table:"customers",limit:20});
-        const xmlhttp = new XMLHttpRequest();
-        xmlhttp.onload = function() {
-            const myObj = JSON.parse(this.responseText);
-            let text = "<table border='1'>"
-            for (let x in myObj) {
-                text += "<tr><td>" + myObj[x].name + "</td></tr>";
-            }
-            text += "</table>"    
-            document.getElementById("demo").innerHTML = text;
-        }
-        xmlhttp.open("PUT", "userlookup_result.html");
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("x=" + dbParam);
     </script>
 </body>
 </html>
