@@ -29,7 +29,7 @@
         dataType: 'json',
 
         success: function(data){
-            data = JSON.parse(data)
+            data = json.html(data)
             console.log("Success", data);
             $('#entries').html('');
             $('#entries').append('<p>' + data + '</p>');
