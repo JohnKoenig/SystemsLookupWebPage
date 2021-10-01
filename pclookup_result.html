@@ -1,62 +1,60 @@
 <html>
 
 <head>
-<Title>PCLookupResult</Title>
-<link href="style.css" rel="stylesheet" type="text/css" />
+    <Title>PC Lookup Result</Title>
+    <link href="systems_logs.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-   <div>
-     <article>
-       <section>
-
-        <table>
-        <tr>
-        <th>DateTime
-        <th>ComputerName
-        <th>Username
-        <th>Event
-        </tr>
-
-        <center>
-        <form action="pclookup_result.php" method="post" name="pclookup">
-              <p><a href="index.html">back</a></p>
-              <p> Another PC Name: <input type"text" name="Computername">
-              <input type="submit" value="Search Again"></p>
+    <center>
+        <form action="pclookup_result.html" method="put" name="pclookup">
+            <p><a href="index.html">back</a></p>
+            <p>Another PC Name: <input type "text" name="name">
+                <input type="submit" value="Search Again"></p>
         </form>
-        </center>
+    </center>
 
-<?php
+    <div id="loadEvents"></div>
 
-//connect to database
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-$query = "SELECT CONVERT(varchar,DateTime,100) AS 'DateTime', ComputerName, UserName, Event FROM GeneralActivity where ComputerName = '".$_POST["Computername"]."' order by dbo.GeneralActivity.DateTime desc";
+    <script type="text/javascript">
+        function displayEvents(data) {
+            var API_URL = 'https://ggoigr3j83.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/';
+            $(document).ready(function() {
+                $.ajax({
 
-         # perform the query
-        $result = mssql_query($query);
+                    url: API_URL,
+                    type: 'GET',
+                    dataType: 'json',
 
-        if(! $result)
-        echo "No match Found!";
-        else
-        while($row = mssql_fetch_array($result)){
+                    success: function(data) {
+                        //console.log("Success", data);
+                        //data = JSON.stringify(data);
+                        //data = JSON.parse(data);
 
-        print "<tr>\n";
-        print "   <td>" . $row["DateTime"] . "\n";
-        print "   <td>" . $row["ComputerName"] . "\n";
-        print "   <td>" . $row["UserName"] . "\n";
-        print "   <td>" . $row["Event"] . "\n";
-        print "</tr>\n";
+                        var searchPCName = window.location.search.substr(1);
+                        var searchPCName = searchPCName.slice(5);
+                        // console.log("search", searchPCName);
+                        var output = "<table class=table1>";
+                        output += "<tr><th>OsLocalDateTime</th><th>CsUserName</th><th>CsName</th><th>Event</th><th>LogonServer</th><th>OsUptimeDays</th><th>OsUptimeHours</th></tr>";
+                        for (var i in data.Items) {
+                            if (Object.values(data.Items[i].CsName) == searchPCName) {
+                                var myDate = new Date(parseInt(Object.values(data.Items[i].OsLocalDateTime)));
+                                output += "<tr><td>" + myDate.toLocaleString() + "</td><td>" + Object.values(data.Items[i].CsUserName) + "</td><td>" + Object.values(data.Items[i].CsName) + "</td><td>" + Object.values(data.Items[i].Event) + "</td><td>" + Object.values(data.Items[i].LogonServer) + "</td><td>" + Object.values(data.Items[i].OsUptimeDays) + "</td><td>" + Object.values(data.Items[i].OsUptimeHours) + "</td></tr>";
+                            }
+                        }
+                        output += "</table>";
 
-}
+                        // Output the data to the "loadEvents" element
+                        document.getElementById("loadEvents").innerHTML = output;
+                    }
+                });
+            });
+        }
+        window.onload = displayEvents;
+    </script>
 
-
-        mssql_close($dbhandle);
-
-?>
-
-        </table>
-        </section>
-    </article>
-   </div>
 </body>
+
 </html>

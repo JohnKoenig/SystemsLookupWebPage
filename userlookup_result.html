@@ -1,45 +1,60 @@
 <html>
 
 <head>
-<Title>UserLookupResult</Title>
-<link href="style.css" rel="stylesheet" type="text/css" />
+    <Title>UserLookupResult</Title>
+    <link href="systems_logs.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     <center>
-    <form action="userlookup_result.php" method="put" name="userlookup">
-        <p><a href="index.html">back</a></p>
-        <p>Another User Name: <input type"text" name="name">
-        <input type="submit" value="Search Again"></p>
-    </form>
+        <form action="userlookup_result.html" method="put" name="userlookup">
+            <p><a href="index.html">back</a></p>
+            <p>Another User Name: <input type "text" name="name">
+                <input type="submit" value="Search Again"></p>
+        </form>
     </center>
 
-    <!--
-    <iframe src="https://ggoigr3j83.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/"></iframe>
-    <hr>
-    -->
+    <div id="loadEvents"></div>
 
-    <div id="entries">
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
     <script type="text/javascript">
-        var API_URL = 'https://ggoigr3j83.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/';
-        $(document).ready(function(){
-        $.ajax({
+        function displayEvents(data) {
+            var API_URL = 'https://ggoigr3j83.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/';
+            $(document).ready(function() {
+                $.ajax({
 
-        url: API_URL,
-        type: 'GET',
-        dataType: 'json',
+                    url: API_URL,
+                    type: 'GET',
+                    dataType: 'json',
 
-        success: function(data){
-            console.log("Success", data);
-            data2 = JSON.stringify(data);
-            console.log("Success Again", data2);
-            $('#entries').html('');
-            $('#entries').append('<p>' + data2 + '</p>');
-            }
-        });
-        });
+                    success: function(data) {
+                        //console.log("Success", data);
+                        //data = JSON.stringify(data);
+                        //data = JSON.parse(data);
+
+                        var searchUserName = window.location.search.substr(1);
+                        var searchUserName = searchUserName.slice(5);
+                        // console.log("search", searchUserName)
+                        var output = "<table class=table1>";
+                        output += "<tr><th>OsLocalDateTime</th><th>CsUserName</th><th>CsName</th><th>Event</th><th>LogonServer</th><th>OsUptimeDays</th><th>OsUptimeHours</th></tr>";
+                        for (var i in data.Items) {
+                            if (Object.values(data.Items[i].CsUserName) == "KEMIA\\" + searchUserName) {
+                                var myDate = new Date(parseInt(Object.values(data.Items[i].OsLocalDateTime)));
+                                output += "<tr><td>" + myDate.toLocaleString() + "</td><td>" + Object.values(data.Items[i].CsUserName) + "</td><td>" + Object.values(data.Items[i].CsName) + "</td><td>" + Object.values(data.Items[i].Event) + "</td><td>" + Object.values(data.Items[i].LogonServer) + "</td><td>" + Object.values(data.Items[i].OsUptimeDays) + "</td><td>" + Object.values(data.Items[i].OsUptimeHours) + "</td></tr>";
+                            }
+                        }
+                        output += "</table>";
+
+                        // Output the data to the "loadEvents" element
+                        document.getElementById("loadEvents").innerHTML = output;
+                    }
+                });
+            });
+        }
+        window.onload = displayEvents;
     </script>
+
 </body>
+
 </html>
