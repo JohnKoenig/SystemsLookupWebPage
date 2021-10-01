@@ -20,7 +20,7 @@
 
     <script type="text/javascript">
         function displayEvents(data) {
-            var API_URL = 'https://ggoigr3j83.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/';
+            var API_URL = 'https://65u8acq5hk.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read-user/';
             $(document).ready(function() {
                 $.ajax({
 
@@ -29,20 +29,22 @@
                     dataType: 'json',
 
                     success: function(data) {
-                        //console.log("Success", data);
-                        //data = JSON.stringify(data);
-                        //data = JSON.parse(data);
+                        console.log("Success", data);
+                        data = JSON.stringify(data);
+                        data = JSON.parse(data);
 
                         var searchUserName = window.location.search.substr(1);
                         var searchUserName = searchUserName.slice(5);
-                        // console.log("search", searchUserName)
+                        console.log("search", searchUserName)
                         var output = "<table class=table1>";
                         output += "<tr><th>OsLocalDateTime</th><th>CsUserName</th><th>CsName</th><th>Event</th><th>LogonServer</th><th>OsUptimeDays</th><th>OsUptimeHours</th></tr>";
                         for (var i in data.Items) {
-                            if (Object.values(data.Items[i].CsUserName) == "KEMIA\\" + searchUserName) {
-                                var myDate = new Date(parseInt(Object.values(data.Items[i].OsLocalDateTime)));
-                                output += "<tr><td>" + myDate.toLocaleString() + "</td><td>" + Object.values(data.Items[i].CsUserName) + "</td><td>" + Object.values(data.Items[i].CsName) + "</td><td>" + Object.values(data.Items[i].Event) + "</td><td>" + Object.values(data.Items[i].LogonServer) + "</td><td>" + Object.values(data.Items[i].OsUptimeDays) + "</td><td>" + Object.values(data.Items[i].OsUptimeHours) + "</td></tr>";
-                            }
+                            //if (Object.values(data.Items[i].CsUserName) == "KEMIA\\" + searchUserName) {
+                            var myDate = new Date(parseInt(Object.values(data.Items[i].OsLocalDateTime)));
+                            console.log("date", myDate);
+                            //output += "<tr><td>" + myDate.toLocaleString() + "</td><td>" + Object.values(data.Items[i].CsUserName) + "</td><td>" + Object.values(data.Items[i].CsName) + "</td><td>" + Object.values(data.Items[i].Event) + "</td><td>" + Object.values(data.Items[i].LogonServer) + "</td><td>" + Object.values(data.Items[i].OsUptimeDays) + "</td><td>" + Object.values(data.Items[i].OsUptimeHours) + "</td></tr>";
+                            output += "<tr><td>" + "test" + "</td><td>" + "test" + "</td><td>" + "test" + "</td><td>" + "test" + "</td><td>" + "test" + "</td><td>" + "test" + "</td><td>" + "test" + "</td></tr>";
+                            //}
                         }
                         output += "</table>";
 
