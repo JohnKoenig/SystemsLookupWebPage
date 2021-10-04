@@ -1,13 +1,13 @@
 <html>
 
 <head>
-    <Title>UserLookupResult</Title>
+    <Title>All Lookup Result</Title>
     <link href="systems_logs.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     <center>
-        <form action="userlookup_result.html" method="put" name="userlookup">
+        <form action="alluserlookup_result.html" method="put" name="alluserlookup">
             <p><a href="index.html">back</a></p>
             <p>Another User Name: <input type "text" name="name">
                 <input type="submit" value="Search Again"></p>
@@ -20,7 +20,7 @@
 
     <script type="text/javascript">
         function displayEvents(data) {
-            var API_URL = 'https://65u8acq5hk.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read-user/';
+            var API_URL = 'https://grt4b6vuq5.execute-api.us-east-2.amazonaws.com/Prod/systems-update-read/';
             $(document).ready(function() {
                 $.ajax({
 
@@ -43,7 +43,6 @@
                                 var myDate = new Date(parseInt(Object.values(data.Items[i].OsLocalDateTime)));
                                 console.log("date", myDate);
                                 output += "<tr><td>" + myDate.toLocaleString() + "</td><td>" + Object.values(data.Items[i].CsUserName) + "</td><td>" + Object.values(data.Items[i].CsName) + "</td><td>" + Object.values(data.Items[i].Event) + "</td><td>" + Object.values(data.Items[i].LogonServer) + "</td><td>" + Object.values(data.Items[i].OsUptimeDays) + "</td><td>" + Object.values(data.Items[i].OsUptimeHours) + "</td></tr>";
-                                //output += "<tr><td>" + "test" + "</td><td>" + "test" + "</td><td>" + "test" + "</td><td>" + "test" + "</td><td>" + "test" + "</td><td>" + "test" + "</td><td>" + "test" + "</td></tr>";
                             }
                         }
                         output += "</table>";
