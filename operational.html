@@ -1,3 +1,913 @@
 <html>
-    <body>Comming Soon</body>
+
+<head>
+    <title>Systems Operational Logs</title>
+    <link href="systems_logs.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <p><a href="index.html">back</a></p>
+    <h2>Operational Team</h2>
+
+    <table class="table1">
+        <tr>
+            <th>Server</th>
+            <th>Daily Logs</th>
+            <th>Log</th>
+        </tr>
+        <tr>
+            <td>Batch</td>
+            <td>WCPOLS (Tues - Sat, 6:00 AM)
+                <br>Find Lines:
+                <br>Upload
+                <br>\\vela\apps\kemisys\prd\Batch\Out\
+                <br>ISO_WCPOLS_SFTP\policy_.txt
+                <br>Transferred xx bytes in 0.0xx seconds,
+                <br>Transfer succeeded</td>
+            <td><a href="logs/KEMI_to_ISO_SFTP.txt">Log File</a></td>
+        </tr>
+        <tr>
+            <td>Vela</td>
+            <td>Batch Documents Archive Cleanup (Daily, 5:00 AM)</td>
+            <td><a href="logs/DCS_Archive_Del.txt">Log File</a></td>
+        </tr>
+        <tr>
+            <td>Vela</td>
+            <td>Purge of batch out folders older than 6 months (First of month, 5:30 AM)</td>
+            <td><a href="logs/batch_out_purge.txt">Log File</a></td>
+        </tr>
+        <tr>
+            <td>Vela</td>
+            <td>Review Storage Alerts in OmniCenter
+                <br>Check Free Space on IR Servers and Vela
+                <br>1 hour for 12 hours)</td>
+            <td><a href="logs/getFreeSize.txt">Log File</a></td>
+        </tr>
+        <tr>
+            <td>e1-prd-ex16-1.kemi.com</td>
+            <td>IREmail Check Inbox Check Log 1 (M-F starting at 8:00 AM running every
+                <br>1 hour for 12 hours)</td>
+            <td><a href="logs/IREmails1.htm">Log File</a> Script Offline.</td>
+        </tr>
+        <tr>
+            <td>e1-prd-ex16-1.kemi.com</td>
+            <td>IREmail Check Inbox Check Log 2 (M-F starting at 9:00 AM running every
+                <br>1 hour for 12 hours)</td>
+            <td><a href="logs/IREmails2.htm">Log File</a> Script Offline.</td>
+        </tr>
+        <tr>
+            <td>IRUTIL2-PRD</td>
+            <td>Errored IR Tasks
+                <br>Log should display current date.
+                <br>Log should list tasks with errors. If errors are found, contact Help Desk.
+            </td>
+            <td><a href="logs/ir_errored_tasks.txt">Log File</a></td>
+        </tr>
+        <tr>
+            <td>IRUTIL1-PRD</td>
+            <td>IRUTIL1-PRD Cold Import Errors
+                <br>Log should display current date.
+                <br>Log should list no files. If files are found, contact Help Desk.
+            </td>
+            </td>
+            <td><a href="logs/IrUtil1ColdImpErr.txt">Log File</a></td>
+        </tr>
+        <tr>
+            <td>IRUTIL1-PRD</t>
+                <td>Purge COLD and FUP Backup folders Older than 30 Days
+                    <br>Log should display current date.
+                    <br>Log should list some files that were deleted.
+                </td>
+                <td><a href="logs/FupAndColdBackupPurge.txt">Log File</a></td>
+        </tr>
+        <tr>
+            <td>IRUTIL1-PRD</td>
+            <td>Monitor if error FUP files are present in PLCY FUP, CLMS or FUP correction
+                <br>Log should display current date.
+                <br>Log will list directories that contain error files.
+                <br>All errors should be investigated by Help Desk.
+            </td>
+            <td><a href="logs/erroredFupLog.txt">Log File</a></td>
+        </tr>
+        <tr>
+            <td>IRUTIL2-PRD</td>
+            <td>CPU Purge FUP
+                <br>Log should display current date.
+                <br>Log should list any ImageRight files that will be purged.
+            </td>
+            <td><a href="logs/CPU_FUP_Purge_Log.txt">Log File</a></td>
+        </tr>
+        <tr>
+            <td>IRUTIL3-PRD</td>
+            <td>Monitor and Add Users to Audit Level 'Delete Events'
+                <br>Log should display current date.
+                <br>Log will show new users added to auditing. Will usually show that no users have been added. Report errors to Help Desk.
+            </td>
+            <td><a href="logs/IRupdateAuditUsers.txt">Log File</a></td>
+        </tr>
+
+
+
+        <tr>
+            <td>otcs-2</td>
+            <td>CSPRD file/path query. Make sure the listed date
+                <br> is current and filesize is greater than 50MB (M-F, 10:30 PM)</td>
+            <td><a href="logs/OTExport.txt">Log File</a></td>
+        </tr>
+
+        <!-- KEMI Web Deploy -->
+        <tr>
+            <td>KEMI</td>
+            <td>Web Deploy Export of 1pwwww01.kemi.com Email
+                <br>(Nightly at 11:00 PM) </td>
+            <td>
+                <!--
+                        <table class="table2">
+
+                        # query the users table for all fields
+                        $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'KEMI' and Subject like 'Web Deploy Export of Sigma-PRD.kemi.com' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE() Order by ReceivedDate";
+
+                        # perform the query
+                        $result = mssql_query($query);
+
+                        if (! $result)
+                        echo "No emails for this date!";
+                        else
+                        while($row = mssql_fetch_array($result)){
+
+                               print "<tr>\n";
+                                print "   <td>" . $row["Vendor"]."</td>\n";
+                                print "   <td>" . $row["ReceivedDate"]."</td>\n";
+                                print "   <td>" . $row["ReceivedTime"]."</td>\n";
+                                print "   <td>" . $row["Sender"]."</td>\n";
+                                print "   <td>" . $row["Subject"]."</td>\n";
+                                print "   <td>" . $row["MiscInfo"]."</td>\n";
+                               print "</tr>\n";
+
+                        }
+                  </table>
+                  -->
+            </td>
+        </tr>
+
+        <!-- ISO FST : External Report -->
+
+        <tr>
+            <td>ISO</td>
+            <td>FST: External Report -
+                <br>KENTUCKY SCHOOL BOARD INSURANCE TRUST (1713) Email</td>
+            <td>
+                <!--
+                <table class="table2">
+                        #Query table for all fields
+                        $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'ISO' and Subject like 'FST: External Report - KENTUCKY SCHOOL BOARD INSURANCE TRUST (1713)' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE() Order by ReceivedDate";
+
+                        # perform the query
+                        $result = mssql_query($query);
+
+                        if (! $result)
+                        echo "No emails for this date!";
+                        else
+                        while($row = mssql_fetch_array($result)){
+
+                               print "<tr>\n";
+                                print "   <td>" . $row["Vendor"]."</td>\n";
+                                print "   <td>" . $row["ReceivedDate"]."</td>\n";
+                                print "   <td>" . $row["ReceivedTime"]."</td>\n";
+                                print "   <td>" . $row["Sender"]."</td>\n";
+                                print "   <td>" . $row["Subject"]."</td>\n";
+                               print "    <td>" . $row["MiscInfo"]."</td>\n";
+                               print "</tr>\n";
+
+                        }
+                  </table>
+                  -->
+            </td>
+        </tr>
+
+
+
+        <!-- ISO FST: External Report -->
+
+        <tr>
+            <td>ISO</td>
+            <td>FST: External Report -
+                <br>KENTUCKY SCHOOL BOARD INSURANCE TRUST (1708) Email</td>
+            <td>
+                <!--
+                <table class="table2">
+                        #Query table for all fields
+                        $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'ISO' and Subject like 'FST: External Report - KENTUCKY EMPLOYERS MUTUAL INS. CO. (1708)' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE() Order by ReceivedDate";
+
+
+                        # perform the query
+                        $result = mssql_query($query);
+
+
+                        if (! $result)
+                        echo "No emails for this date!";
+                        else
+                        while($row = mssql_fetch_array($result)){
+
+                               print "<tr>\n";
+                                print "   <td>" . $row["Vendor"]."</td>\n";
+                                print "   <td>" . $row["ReceivedDate"]."</td>\n";
+                                print "   <td>" . $row["ReceivedTime"]."</td>\n";
+                                print "   <td>" . $row["Sender"]."</td>\n";
+                                print "   <td>" . $row["Subject"]."</td>\n";
+                               print "    <td>" . $row["MiscInfo"]."</td>\n";
+                               print "</tr>\n";
+                                }
+                  </table>
+                -->
+            </td>
+        </tr>
+
+        <!-- ISO FROI to ClaimSearch -->
+        <tr>
+            <td>ISO</td>
+            <td>FROI to ClaimSearch Universal Format Mapping Summary
+                <br>KENTUCKY EMPLOYERS MUTUAL INS. CO. Email</td>
+            <td>
+                <!--
+                <table class="table2">
+                        #Query table for all fields
+                        $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'ISO' and Subject like 'FROI to ClaimSearch Universal Format Mapping Summary Report - KENTUCKY EMPLOYERS MUTUAL INS. CO.' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE() Order by ReceivedDate";
+
+                        # perform the query
+                        $result = mssql_query($query);
+
+
+                        if (! $result)
+                        echo "No emails for this date!";
+                        else
+                        while($row = mssql_fetch_array($result)){
+
+                               print "<tr>\n";
+                                print "   <td>" . $row["Vendor"]."</td>\n";
+                                print "   <td>" . $row["ReceivedDate"]."</td>\n";
+                                print "   <td>" . $row["ReceivedTime"]."</td>\n";
+                                print "   <td>" . $row["Sender"]."</td>\n";
+                                print "   <td>" . $row["Subject"]."</td>\n";
+                               print "    <td>" . $row["MiscInfo"]."</td>\n";
+                               print "</tr>\n";
+                                }
+                  </table>
+                  -->
+            </td>
+        </tr>
+
+
+        <!-- Sync WSPRD -->
+        <tr>
+            <td>aws-tst-wcf-1</td>
+            <td>Sync Report for WSPRD to WSPRD2
+                <br><a href="logs/wsprd-to-wsprd2_Detailed.log">Log File</a> </td>
+
+            <td>
+                <!--
+                        <table class="table2">
+
+                        # query the users table for all fields
+                         $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'WCF' and Subject like '%wsprd-to-wsprd2%' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE() Order by ReceivedDate";
+
+                        # perform the query
+                        $result = mssql_query($query);
+
+                        if (! $result)
+                        echo "No emails for this date!";
+                        else
+                        while($row = mssql_fetch_array($result)){
+
+                               print "<tr>\n";
+                                print "   <td>" . $row["Vendor"]."</td>\n";
+                                print "   <td>" . $row["ReceivedDate"]."</td>\n";
+                                print "   <td>" . $row["ReceivedTime"]."</td>\n";
+                                print "   <td>" . $row["Sender"]."</td>\n";
+                                print "   <td>" . $row["Subject"]."</td>\n";
+                                print "   <td>" . $row["MiscInfo"]."</td>\n";
+                               print "</tr>\n";
+
+                        }
+                  </table>
+                  -->
+            </td>
+        </tr>
+
+        <!-- ACK Control Report -->
+        <tr>
+            <td>ISO</td>
+            <td>ACK Control Report for Customer ID:1708 Email </td>
+            <td>
+                <!--
+                <table class="table2">
+                        #Query table for all fields
+                        $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'ISO' and Subject like 'Ack Control Report for Customer ID: 1708' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE() Order by ReceivedDate";
+
+                        # perform the query
+                        $result = mssql_query($query);
+
+
+                        if (! $result)
+                        echo "No emails for this date!";
+                        else
+                        while($row = mssql_fetch_array($result)){
+
+                               print "<tr>\n";
+                                print "   <td>" . $row["Vendor"]."</td>\n";
+                                print "   <td>" . $row["ReceivedDate"]."</td>\n";
+                                print "   <td>" . $row["ReceivedTime"]."</td>\n";
+                                print "   <td>" . $row["Sender"]."</td>\n";
+                                print "   <td>" . $row["Subject"]."</td>\n";
+                               print "    <td>" . $row["MiscInfo"]."</td>\n";
+                               print "</tr>\n";
+                                }
+                  </table>
+                -->
+            </td>
+        </tr>
+
+        <!-- ACK Control Report -->
+
+        <tr>
+            <td>ISO</td>
+            <td>ACK Control Report for Customer ID:1713 Email
+                <br>Sporadic dates ok. If unsure check with Stephen Mason </td>
+            <td>
+                <!--
+                <table class="table2">
+                        #Query table for all fields
+                        $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'ISO' and Subject like 'Ack Control Report for Customer ID: 1713%' and ReceivedDate between DateAdd(DD,-30,GETDATE() ) and GETDATE() Order by ReceivedDate";
+
+                        # perform the query
+                        $result = mssql_query($query);
+
+
+                        if (! $result)
+                        echo "No emails for this date!";
+                        else
+                        while($row = mssql_fetch_array($result)){
+
+                               print "<tr>\n";
+                                print "   <td>" . $row["Vendor"]."</td>\n";
+                                print "   <td>" . $row["ReceivedDate"]."</td>\n";
+                                print "   <td>" . $row["ReceivedTime"]."</td>\n";
+                                print "   <td>" . $row["Sender"]."</td>\n";
+                                print "   <td>" . $row["Subject"]."</td>\n";
+                               print "    <td>" . $row["MiscInfo"]."</td>\n";
+                               print "</tr>\n";
+                                }
+                  </table>
+                -->
+            </td>
+        </tr>
+
+
+        <!-- NCCI Policy Submission -->
+        <tr>
+            <td>NCCI</td>
+            <td>NCCI - Policy Submission Results Report for Coverage Provider Group ID: 33731</td>
+            <td>
+                <!--
+                <table class="table2">
+                        #Query table for all fields
+                        $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'NCCI' and Subject like 'NCCI - Policy Submission Results Report for Coverage Provider Group ID: 33731 - Submission ID:%' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE() Order by ReceivedDate";
+
+                        # perform the query
+                        $result = mssql_query($query);
+
+
+                        if (! $result)
+                        echo "No emails for this date!";
+                        else
+                        while($row = mssql_fetch_array($result)){
+
+                               print "<tr>\n";
+                                print "   <td>" . $row["Vendor"]."</td>\n";
+                                print "   <td>" . $row["ReceivedDate"]."</td>\n";
+                                print "   <td>" . $row["ReceivedTime"]."</td>\n";
+                                print "   <td>" . $row["Sender"]."</td>\n";
+                                print "   <td>" . $row["Subject"]."</td>\n";
+                                print "    <td>" . $row["MiscInfo"]."</td>\n";
+                               print "</tr>\n";
+                                }
+                  </table>
+                -->
+            </td>
+        </tr>
+
+        <!-- 5/3 PosPay Confirm -->
+
+        <tr>
+            <td>KEMI</td>
+            <td>PosPay Confirmation Email </td>
+            <td>
+                <!--
+                        <table class="table2">
+
+                        # query the users table for all fields
+                        $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'KEMI' and Subject like 'PosPay Confirmation%' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE() Order by ReceivedDate";
+
+                        # perform the query
+                        $result = mssql_query($query);
+
+                        if (! $result)
+                        echo "No emails for this date!";
+                        else
+                        while($row = mssql_fetch_array($result)){
+
+                               print "<tr>\n";
+                                print "   <td>" . $row["Vendor"]."</td>\n";
+                                print "   <td>" . $row["ReceivedDate"]."</td>\n";
+                                print "   <td>" . $row["ReceivedTime"]."</td>\n";
+                                print "   <td>" . $row["Sender"]."</td>\n";
+                                print "   <td>" . $row["Subject"]."</td>\n";
+                                print "   <td>" . $row["MiscInfo"]."</td>\n";
+                               print "</tr>\n";
+
+                        }
+                  </table>
+                -->
+            </td>
+        </tr>
+
+        <!-- NCCI 33731 Submission -->
+        <tr>
+            <td>NCCI</td>
+            <td>33731 - Successful Transmission Email </td>
+            <td>
+                <!--
+                <table class="table2">
+                    #Query table for all fields $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'NCCI' and Subject like '33731 - Successful Transmission%' and ReceivedDate between DateAdd(DD,-7,GETDATE()
+                    ) and GETDATE() Order by ReceivedDate"; # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- WS_FTP KEMI to PMSI BTCH -->
+        <tr>
+            <td>Redwood</td>
+            <td>WS_FTP - KEMI_to_PMSI_BTCH (Monday - Friday, During Batch calls scp file)
+                <br>-Batch Job-
+                <br>Look for:
+                <br>STOR KENT0000.LIS
+                <br>125 Uploading in ASCII file KEMI0000.LIS
+                <br>226 Transfer completed during Processing Line 8.</td>
+            <td><a href="logs/KEMI_to_PMSI_BTCH.txt" target="_blank">Log File</a></td>
+        </tr>
+
+        <!-- KEMI to Mitchel (replacing PMSI-Helios) -->
+
+        <tr>
+            <td>1plscripts01</td>
+            <td>sftp_put_mitchell_prd.sh (Daily 7:45 AM, 12:15 PM, and 2:45 PM)
+                <br> Look for: Directory listing of FTP and move files success</td>
+            <td><a href="logs/sftp_put_mitchell_prd.txt" target="_blank">Log File</a></td>
+        </tr>
+
+        <!-- KEMI_to_PMSI_Pharmacy -->
+
+        <tr>
+            <td>Batch</td>
+            <td>KEMI_to_PMSI_Pharmacy.scp
+                <br>SCHEDULER/BTCH_KEMI_PMSI_FTPS_SEND.cmd (Daily Batch)
+                <br> Look for:Uploading in ASCII file:
+                <br> KEMI_SR2_recon_yyyymmdd070950.txt</td>
+            <td><a href="logs/KEMI_to_PMSI_pharmacy.txt" target="_blank">Log File</a></td>
+        </tr>
+
+        <!-- PMSI_to_KEMI_Pharmacy -->
+
+        <tr>
+            <td>Batch</td>
+            <td>PMSI_to_KEMI_Pharmacy.scp
+                <br> SCHEDULER/BTCH_PMSI_FTPS_GET.cmd (Daily Batch)
+                <br> Look for: Downloading in ASCII file KEMI_SN_*.txt
+                <br> Files sent twice monthly. </td>
+            <td><a href="logs/PMSI_to_KEMI_pharmacy.txt" target="_blank">Log File</a></td>
+        </tr>
+
+        <!--
+        #// PSI2 PMSI to KEMI #
+        <tr>
+            #
+            <td>1plscripts01</td>
+            #
+            <td> PMSI-Helios_to_KEMI (Daily 5:00 AM, Files not always downloaded) # <br>Look for: Directory listing of FTP and move files success</td>
+            #
+            <td><a href="logs/PMSI-Helios_to_KEMI.txt">Log File</a></td>
+            # </tr>
+        -->
+
+        <!-- PSI2 - KEMI_Policy_FTP_to_NCCI -->
+
+        <tr>
+            <td>1plscripts01</td>
+            <td>KEMI_Policy_FTP_to_NCCI_EMODS (Daily 6:00 AM)
+                <br>Look for: "Files to ftp...policy_MM-DD-YYYY.txt"
+                <br>Verify in the provided directory listing the name of the same file.
+                <br><a href="logs/KEMI_Policy_NCCI_SFTP.txt">Log</a></td>
+            <td>
+                <!--
+                <table class="table2">
+                    $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'NCCI' and Subject like '%KEMI_Policy_FTP_to_NCCI_EMODS%' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE() Order by ReceivedDate";
+                    # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- Equian -->
+        <tr>
+            <td>1plscripts01</td>
+            <td>KEMI_to_Equian CapturePlus (Monday - Friday, Nightly)</td>
+            <td><a href="logs/ftp_equian.txt">Log File</a></td>
+        </tr>
+
+        <!-- Equian Rejected Files -->
+        <tr>
+            <td>1plscripts01</td>
+            <td>Rejected Equian files downloaded from Equian FTP site and imported to ImageRight.</td>
+            <td><a href="logs/equian_rejected.txt">Log File</a></td>
+        </tr>
+
+        <!-- Send_ISO FTP Daily // Send FTP To ISO -->
+
+        <tr>
+            <td>1plscripts01</td>
+            <td>Send ISO Submissions
+                <br><a href="logs/send_iso_ftp.txt">Logs</a></td>
+            <td>
+                <!--
+                <table class="table2">
+                    $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'ISO' and Sender = 'EFTServer@iso.com' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE() Order by ReceivedDate"; # perform
+                    the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- Get_ISO FTP and Rename Daily // Get ISO and Rename -->
+
+        <tr>
+            <td>1plscripts01</td>
+            <td>Get ISO and Rename to Batch/In
+                <br>Daily 4pm
+                <br><a href="logs/Get_FTP_ISO_and_Rename.txt">Logs</a></td>
+            <td>
+                <!--
+                <table class="table2">
+                    $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'ISO' and subject like'%Get_FTP_ISO_and_Rename' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE() Order by ReceivedDate";
+                    # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- OMCA InvoicesUR -->
+        <tr>
+            <td>1plscripts01</td>
+            <td>OMCA Invoices UR
+                <br>*NOTE*, if there are many days with 0 results,
+                <br>please verify no files in box.com/enterprise/FTP Transfers/omca/invoicesur
+                <br>
+                <br><a href="logs/omca_invoicesur_log.txt">Log</a></td>
+            <td>
+                <!--
+                <table class="table2">
+
+                    # query the users table for all fields $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'OMCA' and Subject like '%OMCA Daily UR Invoice%' and ReceivedDate between DateAdd(DD,-7,GETDATE()
+                    ) and GETDATE() Order by ReceivedDate"; # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- OMCA Claimletters -->
+        <tr>
+            <td>1plscripts01</td>
+            <td>OMCA Claimletters
+                <br>*NOTE*, if there are many days with 0 results,
+                <br>please verify no files in box.com/enterprise/FTP Transfers/omca/claimletters
+                <br>
+                <br><a href="logs/omca_claimletters_log.txt">Log</a></td>
+            <td>
+                <!--
+                <table class="table2">
+
+                    # query the users table for all fields $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'OMCA' and Subject like '%claimletter files%' and ReceivedDate between DateAdd(DD,-7,GETDATE()
+                    ) and GETDATE() Order by ReceivedDate"; # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- OMCA UR Reports -->
+
+        <tr>
+            <td>1plscripts01</td>
+            <td>OMCA UR Reports
+                <br>*NOTE*, if there are many days with 0 results,
+                <br>please verify no files in box.com/enterprise/FTP Transfers/omca/urreports
+                <br>
+                <br><a href="logs/omca_urreports_log.txt">Log</a></td>
+            <td>
+                <!--
+                <table class="table2">
+
+                    # query the users table for all fields $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'OMCA' and Subject like '%OMCA URReports%' and ReceivedDate between DateAdd(DD,-3,GETDATE() )
+                    and GETDATE() Order by ReceivedDate"; # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- OMCA ProviderSelectionForm113 -->
+
+        <tr>
+            <td>1plscripts01</td>
+            <td>OMCA Providerselection Form113
+                <br>*NOTE*, if there are many days with 0 results,
+                <br>please verify no files in box.com/enterprise/FTP Transfers/omca/providersel../form113
+                <br>
+                <br><a href="logs/omca_providerselectionform113_log.txt">Log</a></td>
+            <td>
+                <!--
+                <table class="table2">
+
+                    # query the users table for all fields $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'OMCA' and Subject like '%Form113%' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE()
+                    Order by ReceivedDate"; # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- OMCA ProviderSelectionForm106 -->
+
+        <tr>
+            <td>1plscripts01</td>
+            <td>OMCA Providerselection Form106
+                <br>*NOTE*, if there are many days with 0 results,
+                <br>please verify no files in box.com/enterprise/FTP Transfers/omca/providersel../form106
+                <br>
+                <br><a href="logs/omca_providerselectionform106_log.txt">Log</a></td>
+            <td>
+                <!--
+                <table class="table2">
+
+                    # query the users table for all fields $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'OMCA' and Subject like '%Form106%' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE()
+                    Order by ReceivedDate"; # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- OMCA Telephonic Report -->
+
+        <tr>
+            <td>1plscripts01</td>
+            <td>OMCA Telephonic Reports
+                <br><a href="logs/omca_telephonicreport_log.txt">Log</a></td>
+            <td>
+                <!--
+                <table class="table2">
+
+                    # query the users table for all fields $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'OMCA' and Subject like '%Daily Telephonic Report%' and ReceivedDate between DateAdd(DD,-7,GETDATE()
+                    ) and GETDATE() Order by ReceivedDate"; # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- OMCA Telephonic Invoice -->
+
+        <tr>
+            <td>1plscripts01</td>
+            <td>OMCA TelephonicInvoice
+                <br><a href="logs/omca_telephonicinvoice_log.txt">Log</a></td>
+            <td>
+                <!--
+                <table class="table2">
+
+                    # query the users table for all fields $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'OMCA' and Subject like '%Telephonic Invoice files%' and ReceivedDate between DateAdd(DD,-7,GETDATE()
+                    ) and GETDATE() Order by ReceivedDate"; # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+
+        <!-- Weekly -->
+
+        <tr>
+            <th>Server</th>
+            <th>Weekly Logs</th>
+            <th>Log</th>
+        </tr>
+
+        <!-- Check if any purge files have content -->
+
+        <tr>
+            <td>IRUTIL2-PRD</td>
+            <td>Check if any Purged Files have Content</td>
+            <td><a href="logs/PurgedFilesWithContentReport.txt">Log File</a></td>
+        </tr>
+
+        <tr>
+            <td>1plscripts01</td>
+            <td>Get EMODS from NCCI - SFTP</td>
+            <td><a href="logs/KEMI_Policy_NCCI_SFTP.txt" target="_blank">Log File</a></td>
+        </tr>
+
+        <!-- ISO Cleanup -->
+
+        <tr>
+            <td>Vela</td>
+            <td>ISO\Complete Cleanup (older than 14 day purge)</td>
+            <td><a href="logs/PurgeISO_Complete_Past14Days.txt">Log File</a></td>
+        </tr>
+
+        <!-- NCCI Pickup eWorksheets -->
+
+        <tr>
+            <td>NCCI</td>
+            <td>PICKUP:NCCI eWorksheets at Your Electronic Mailbox Email Logs</td>
+            <td>
+                <!--
+                <table class="table2">
+                    #Query table for all fields $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'NCCI' and Subject like 'PICKUP:NCCI eWorksheets%' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and
+                    GETDATE() Order by ReceivedDate"; # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- NCCI Pickup eLetters -->
+
+        <tr>
+            <td>NCCI</td>
+            <td>PICKUP:NCCI eLetters at Your Electronic Mailbox Email Logs</td>
+            <td>
+                <!--
+                <table class="table2">
+                    #Query table for all fields $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'NCCI' and Subject like 'PICKUP:NCCI eLetters%' and ReceivedDate between DateAdd(DD,-7,GETDATE() ) and GETDATE()
+                    Order by ReceivedDate"; # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+
+        <!-- Monthly -->
+
+        <tr>
+            <th>Server</th>
+            <th>Monthly Logs</th>
+            <th>Log</th>
+        </tr>
+
+        <tr>
+            <td>Vela</td>
+            <td>Purge of Batch in Archive Folders older than
+                <br>6 months (First of Month, 5:35AM)</td>
+            <td><a href="logs/batch_archive_purge.txt">Log File</a></td>
+        </tr>
+
+        <!-- Purge Data Reporting -->
+
+        <tr>
+            <td>Vela</td>
+            <td>Purge Data Reporting Folders older than
+                <br>8 years (First of Month, 5:00AM)</td>
+            <td><a href="logs/data_reporting_purge.txt">Log File</a></td>
+        </tr>
+
+        <!-- Purge PosPay Files -->
+
+        <tr>
+            <td>Vela</td>
+            <td>Purge of PosPay Files older than
+                <br>8 years (First of Month, 5:40AM)</td>
+            <td><a href="logs/PosPay_purge.txt">Log File</a></td>
+        </tr>
+
+        <!-- OMCA Monthly Spreadsheet -->
+
+        <tr>
+            <td>1plscripts01</td>
+            <td>OMCA Monthly Spreadsheet
+                <br><a href="logs/omca_monthly_invoice_log.txt">Log</a></td>
+            <td>
+                <!--
+                <table class="table2">
+
+                    # query the users table for all fields $query = "SELECT Vendor, ReceivedDate, ReceivedTime, Sender, Subject, MiscInfo FROM EmailNotifications WHERE Vendor = 'OMCA' and Subject like '%OMCA Monthly Spreadsheet%' and ReceivedDate between DateAdd(DD,-7,GETDATE()
+                    ) and GETDATE() Order by ReceivedDate"; # perform the query $result = mssql_query($query); if (! $result) echo "No emails for this date!"; else while($row = mssql_fetch_array($result)){ print "
+                    <tr>\n"; print "
+                        <td>" . $row["Vendor"]."</td>\n"; print "
+                        <td>" . $row["ReceivedDate"]."</td>\n"; print "
+                        <td>" . $row["ReceivedTime"]."</td>\n"; print "
+                        <td>" . $row["Sender"]."</td>\n"; print "
+                        <td>" . $row["Subject"]."</td>\n"; print "
+                        <td>" . $row["MiscInfo"]."</td>\n"; print "</tr>\n"; }
+                </table>
+            -->
+            </td>
+        </tr>
+    </table>
+</body>
+
 </html>

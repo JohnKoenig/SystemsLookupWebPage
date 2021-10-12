@@ -19,16 +19,16 @@
         <h3>User/PC Lookup</h3>
         <table>
             <tr>
-                <form action="userlookup_result.html" method="put" name="userlookup">
+                <form action="lookup_user.html" method="put" name="userlookup">
                     <td>User Name:</td>
-                    <td><input type="text" name="name" size="25"></td>
+                    <td><input type="text" name="user" value="jkoenig"></td>
                     <td><input type="submit" value="Submit"></td>
                 </form>
             </tr>
             <tr>
-                <form action="pclookup_result.html" method="put" name="pclookup">
+                <form action="lookup_pc.html" method="put" name="pclookup">
                     <td>PC Name:</td>
-                    <td><input type "text" name="name" size="25"></td>
+                    <td><input type "text" name="pc" value="K001252"></td>
                     <td><input type="submit" value="Submit"></td>
                 </form>
             </tr>
@@ -53,8 +53,17 @@
                         </select>
             </form>
         </p>
-
     </center>
+    <hr>
+    <p>Future Enhancements</p>
+    <ul>
+        <li>Update SAM YAML for API config.</li>
+        <li>Add email information to log pages.</li>
+        <li>Schedule job to copy synclogs to S3.</li>
+        <ul>
+            <li>Future Future: Write logs directly to S3.</li>
+        </ul>
+    </ul>
 </body>
 
 </html>
